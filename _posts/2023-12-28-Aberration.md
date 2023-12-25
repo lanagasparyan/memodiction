@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Aberration
+cover-img: /assets/img/path.jpg
+thumbnail-img: /assets/img/thumb.png
+share-img: /assets/img/path.jpg
 subtitle: A departure or deviation from what is considered usual, normal, or expected.
 tags: [words, aberration, deviation, irregularity, anomaly, conformity, norm, regularity]
 author: memodiction
