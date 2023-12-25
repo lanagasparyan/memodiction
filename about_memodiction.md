@@ -1,6 +1,6 @@
 ---
 layout: page
-title: What is MemoDiction?
+title: About MemoDiction
 subtitle: Imagine a dictionary that helps you remember words better.
 ---
 

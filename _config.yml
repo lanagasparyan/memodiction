@@ -272,6 +272,11 @@ defaults:
       path: "" # any file that's not a post will be a "page" layout by default
     values:
       layout: "page"
+  -
+    scope:
+      path: "_words/" # any file that's not a post will be a "page" layout by default
+    values:
+      layout: "word"
 
 # Exclude these files from production site
 exclude:
