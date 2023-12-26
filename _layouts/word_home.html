@@ -1,0 +1,24 @@
+---
+layout: default  # Replace with your layout
+title: Words  # Optional title
+---
+
+
+{{ content }}
+
+{% for word in site.data.words %}
+  <h2>{{ word.title }}</h2>
+  <p>{{ word.content }}</p>
+{% endfor %}
+
+<!-- Pagination Links -->
+{% if paginator.total_pages > 1 %}
+<nav>
+  {% if paginator.previous_page %}
+  <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+  {% endif %}
+  {% if paginator.next_page %}
+  <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+  {% endif %}
+</nav>
+{% endif %}
