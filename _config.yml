@@ -251,16 +251,11 @@ date_format: "%B %-d, %Y"
 timezone: "America/Toronto"
 markdown: kramdown
 highlighter: rouge
-permalink: /:year-:month-:day-:title/
-paginate: 10
+permalink: /word/:title/
 
 kramdown:
   input: GFM
 
-collections:
-  words:
-    output: true
-    permalink: /words/:name/
 
 # Default YAML values (more information on Jekyll's site)
 defaults:
@@ -297,5 +292,20 @@ exclude:
   - vendor/
 
 plugins:
-  - jekyll-paginate
+  - jekyll-paginate-v2
   - jekyll-sitemap
+
+pagination:
+  enabled: true
+  permalink: 'page/:num/'
+  title: ':title | :num of :max'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
+ # extension: htm
+ # indexpage: 'default'
+  per_page: 10
+  permalink: '/words/page/:num/'
+  trail: 
+    before: 2
+    after: 2

@@ -1,24 +1,11 @@
 ---
-layout: default  # Replace with your layout
-title: Words  # Optional title
+layout: default 
+title: Words
 ---
 
+{{ paginator }}
 
-{{ content }}
-
-{% for word in site.data.words %}
-  <h2>{{ word.title }}</h2>
-  <p>{{ word.content }}</p>
+{% for word in paginator.words %}
+    <h2>{{ word.title }}</h2>
+    <p>{{ word.subtitle }}</p>
 {% endfor %}
-
-<!-- Pagination Links -->
-{% if paginator.total_pages > 1 %}
-<nav>
-  {% if paginator.previous_page %}
-  <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
-  {% endif %}
-  {% if paginator.next_page %}
-  <a href="{{ paginator.next_page_path }}" class="next">Next</a>
-  {% endif %}
-</nav>
-{% endif %}
