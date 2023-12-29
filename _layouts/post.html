@@ -2,78 +2,95 @@
 layout: base
 ---
 
-{% include header.html type="page" %}
+{% include header.html type="post" %}
 
-<main class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
-  <div class="row">
-    <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
+<main class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
 
-      <div class="word-entry">
-        <h1>{{ page.data.word }}</h1>
+      <!-- Word Box -->
+      <div class="word-box rounded p-3 mb-4 shadow">
+        <h1 class="word-title">{{ page.data.word }}</h1>
+        <!-- Speaker Button -->
+        <button class="btn btn-sm speaker-btn position-absolute end-0 me-3 mt-3" onclick="playPronunciation('{{ page.data.word }}')"><i class="fa-solid fa-volume-high" style="font-size:36px;"></i></button>
+      </div>
 
-        {% for definition in page.data.definitions %}
-          <div class="definition">
-            <h2>{{ definition.part_of_speech }}</h2>
-            {% for def in definition.definitions %}
-              <p>{{ def }}</p>
-            {% endfor %}
-            
-            <h3>Synonyms:</h3>
-            <ul>
-              {% for synonym in definition.synonyms %}
-                <li>{{ synonym }}</li>
-              {% endfor %}
-            </ul>
-
-            <h3>Antonyms:</h3>
-            <ul>
-              {% for antonym in definition.antonyms %}
-                <li>{{ antonym }}</li>
-              {% endfor %}
-            </ul>
-
-            <h3>Examples:</h3>
-            <ul>
-              {% for example in definition.examples %}
-                <li>{{ example }}</li>
-              {% endfor %}
-            </ul>
-
-            <h3>Mnemonics:</h3>
-            <ul>
-              {% for mnemonic in definition.mnemonics %}
-                <li>{{ mnemonic }}</li>
-              {% endfor %}
-            </ul>
+      
+      <!-- Definitions -->
+      {% for definition in page.data.definitions %}
+      <div class="definition-box rounded p-3 mb-3 shadow">
+        <h2>{{ definition.part_of_speech | capitalize }}</h2>
+        {% for def in page.data.definitions %}
+          <div class="mb-2">
+            <p class="mb-1"><strong>Definition:</strong> {{ def.definitions }}</p>
+            {% if def.synonyms %}
+              <p class="mb-1"><strong>Synonyms:</strong> {{ def.synonyms | join: ", " }}</p>
+            {% endif %}
+            {% if def.antonyms %}
+              <p class="mb-1"><strong>Antonyms:</strong> {{ def.antonyms | join: ", " }}</p>
+            {% endif %}
+            {% if def.examples %}
+              <div class="mb-1">
+                <strong>Examples:</strong>
+                <ul>
+                  {% for example in def.examples %}
+                    <li>{{ example }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+            {% if def.mnemonics %}
+              <div>
+                <strong>Mnemonics:</strong>
+                <ul>
+                  {% for mnemonic in def.mnemonics %}
+                    <li>{{ mnemonic }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
           </div>
         {% endfor %}
-
-        {% if page.data.etymology %}
-          <div class="etymology">
-            <h2>Etymology:</h2>
-            <p>{{ page.data.etymology.origin }}</p>
-            <p>{{ page.data.etymology.historical_usage }}</p>
-          </div>
-        {% endif %}
-
-        {% if page.data.idioms %}
-          <div class="idioms">
-            <h2>Idioms:</h2>
-            {% for idiom in page.data.idioms %}
-              <p><strong>{{ idiom.expression }}:</strong> {{ idiom.explanation }}</p>
-            {% endfor %}
-          </div>
-        {% endif %}
-
-        {% if page.data.misconceptions %}
-          <div class="misconceptions">
-            <h2>Misconceptions:</h2>
-            {% for misconception in page.data.misconceptions %}
-              <p><strong>{{ misconception.misconception }}:</strong> {{ misconception.explanation }}</p>
-            {% endfor %}
-          </div>
-        {% endif %}
       </div>
+      {% endfor %}
+
+
+      <!-- Etymology -->
+      {% if page.data.etymology %}
+        <div class="etymology-box rounded p-3 mb-3 shadow">
+          <h2>Etymology:</h2>
+          <div class="inner-box">
+            <strong>Origin:</strong> <p>{{ page.data.etymology.origin }}</p>
+            <strong>Historical Usage:</strong> <p>{{ page.data.etymology.historical_usage }}</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <!-- Idioms -->
+      {% if page.data.idioms %}
+        <div class="idioms-box rounded p-3 mb-3 shadow">
+          <h2>Related Idioms:</h2>
+          {% for idiom in page.data.idioms %}
+          <div class="inner-box">
+            <strong>Idiom:</strong> <p>{{ idiom.expression }} </p>
+            <strong>Explanation:</strong> <p>{{ idiom.explanation }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Misconceptions -->
+      {% if page.data.misconceptions %}
+        <div class="misconceptions-box rounded p-3 mb-3 shadow">
+          <h2>Misconceptions:</h2>
+          {% for misconception in page.data.misconceptions %}
+          <div class="inner-box">
+            <strong>Misconception:</strong> <p>{{ misconception.misconception }}</p>
+            <strong>Explanation:</strong> <p>{{ misconception.explanation }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      {% endif %}
 
       {% if page.social-share %}
         {% include social-share.html %}
@@ -83,3 +100,19 @@ layout: base
     </div>
   </div>
 </main>
+
+<script>
+  function playPronunciation(word) {
+    if ('speechSynthesis' in window) {
+      // Web Speech API supported
+      let utterance = new SpeechSynthesisUtterance(word);
+      utterance.rate = 0.25;
+      window.speechSynthesis.speak(utterance);
+      console.log('Pronunciation for:', word); // Placeholder for your API integration
+    } else {
+      // Web Speech API not supported
+      alert('Web Speech API not supported in this browser.');
+      console.log('Web Speech API not supported.');
+    }
+  }
+</script>
