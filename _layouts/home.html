@@ -5,10 +5,32 @@ pagination:
   permalink: /:num/
 ---
 
+
+
 {{ content }}
 
 {% assign posts = paginator.posts | default: site.posts %}
 
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="d-flex">
+      {% if site.post_search %}
+      <button class="input-group-text" id="home-search-link" href="#" title="Search">Search &nbsp;<span class="fa fa-search"></span></button>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+<div class="container badge bg-secondary text-white rounded-pill mt-4 mb-4"> 
+  <div class="row justify-content-center">
+    <div class="d-flex"> 
+      {% if paginator.page > 1 %}
+        Page&nbsp;<span class="font-special">{{ paginator.page }}</span>/<span class="font-special">{{ paginator.total_pages }}</span>
+      {% endif %}
+    </div>
+  </div>
+</div>
 <div class="container mt-4">
   <div class="row">
     {% for post in posts %}
@@ -42,22 +64,51 @@ pagination:
     {% if paginator.previous_page %}
     <li class="page-item">
       <a class="page-link" href="{{ paginator.previous_page_path | absolute_url }}" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">Newer Posts</span>
+        &laquo; Prev
       </a>
     </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">&laquo; Prev</span>
+    </li>
     {% endif %}
-    {% for page in (1..paginator.total_pages) %}
-    <li class="page-item {% if page == paginator.page %}active{% endif %}">
+
+    {% assign max_visible_pages = 1 %}
+    {% assign current_page = paginator.page %}
+    {% assign last_page = paginator.total_pages %}
+    {% assign half_visible = max_visible_pages | divided_by: 2 %}
+    {% assign low_end = current_page | minus: half_visible %}
+    {% assign high_end = current_page | plus: half_visible %}
+
+    {% if low_end < 1 %}
+      {% assign high_end = high_end | plus: low_end | minus: 1 %}
+      {% assign low_end = 1 %}
+    {% endif %}
+
+    {% if high_end > last_page %}
+      {% assign low_end = low_end | minus: high_end | plus: last_page %}
+      {% assign high_end = last_page %}
+    {% endif %}
+
+    {% if low_end < 1 %}
+      {% assign low_end = 1 %}
+    {% endif %}
+
+    {% for page in (low_end..high_end) %}
+    <li class="page-item {% if page == current_page %}active{% endif %}">
       <a class="page-link" href="{{ paginator.paginate_path | replace: ':num', page }}">{{ page }}</a>
     </li>
     {% endfor %}
+
     {% if paginator.next_page %}
     <li class="page-item">
       <a class="page-link" href="{{ paginator.next_page_path | absolute_url }}" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">Older Posts</span>
+        Next &raquo;
       </a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <span class="page-link">Next &raquo;</span>
     </li>
     {% endif %}
   </ul>

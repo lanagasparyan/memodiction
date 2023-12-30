@@ -301,7 +301,7 @@ plugins:
 pagination:
   enabled: true
   permalink: 'page/:num/'
-  title: ':title | :num of :max'
+  title: ':title'
   limit: 0
   sort_field: 'title'
   sort_reverse: false
