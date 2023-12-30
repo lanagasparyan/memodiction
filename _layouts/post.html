@@ -67,7 +67,7 @@ layout: base
       {% endif %}
 
       <!-- Idioms -->
-      {% if page.data.idioms %}
+      {% if page.data.idioms and page.data.idioms.size > 0 %}
         <div class="idioms-box rounded p-3 mb-3 shadow">
           <h2>Related Idioms:</h2>
           {% for idiom in page.data.idioms %}
@@ -80,7 +80,7 @@ layout: base
       {% endif %}
 
       <!-- Misconceptions -->
-      {% if page.data.misconceptions %}
+      {% if page.data.misconceptions and page.data.misconceptions.size > 0 %}
         <div class="misconceptions-box rounded p-3 mb-3 shadow">
           <h2>Misconceptions:</h2>
           {% for misconception in page.data.misconceptions %}
@@ -106,7 +106,7 @@ layout: base
     if ('speechSynthesis' in window) {
       // Web Speech API supported
       let utterance = new SpeechSynthesisUtterance(word);
-      utterance.rate = 0.25;
+      utterance.rate = 0.75;
       window.speechSynthesis.speak(utterance);
       console.log('Pronunciation for:', word); // Placeholder for your API integration
     } else {
