@@ -30,6 +30,9 @@ navbar-links:
 # Remove this parameter if you don't want an image in the navbar
 avatar: "/assets/img/memodiction_logo.png"
 
+url: "https://memodiction.com"  # No trailing slash
+baseurl: ""  # If your site is in the root directory
+
 # By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
 round-avatar: true
 
@@ -291,9 +294,9 @@ exclude:
   - docs/
   - vendor/
   - _words/
-  # - _posts/GRE1300/
-  # - _posts/GRE1700/
-  - _posts/Test/
+  - _posts/GRE1300/
+  - _posts/GRE1700/
+  # - _posts/Test/
 
 plugins:
   - jekyll-paginate-v2
