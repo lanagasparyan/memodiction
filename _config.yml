@@ -291,9 +291,9 @@ exclude:
   - docs/
   - vendor/
   - _words/
-  - _posts/GRE1300/
-  - _posts/GRE1700/
-  # - _posts/Test/
+  # - _posts/GRE1300/
+  # - _posts/GRE1700/
+  - _posts/Test/
 
 plugins:
   - jekyll-paginate-v2
