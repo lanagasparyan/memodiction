@@ -20,39 +20,40 @@ layout: base
       {% for definition in page.data.definitions %}
       <div class="definition-box rounded p-3 mb-3 shadow">
         <h2>{{ definition.part_of_speech | capitalize }}</h2>
-        {% for def in page.data.definitions %}
-          <div class="mb-2">
-            <p class="mb-1"><strong>Definition:</strong> {{ def.definitions }}</p>
-            {% if def.synonyms %}
-              <p class="mb-1"><strong>Synonyms:</strong> {{ def.synonyms | join: ", " }}</p>
-            {% endif %}
-            {% if def.antonyms %}
-              <p class="mb-1"><strong>Antonyms:</strong> {{ def.antonyms | join: ", " }}</p>
-            {% endif %}
-            {% if def.examples %}
-              <div class="mb-1">
-                <strong>Examples:</strong>
-                <ul>
-                  {% for example in def.examples %}
-                    <li>{{ example }}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-            {% endif %}
-            {% if def.mnemonics %}
-              <div>
-                <strong>Mnemonics:</strong>
-                <ul>
-                  {% for mnemonic in def.mnemonics %}
-                    <li>{{ mnemonic }}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-            {% endif %}
-          </div>
-        {% endfor %}
+        <div class="mb-2">
+          {% for def in definition.definitions %}
+            <p class="mb-1"><strong>Definition:</strong> {{ def }}</p>
+          {% endfor %}
+          {% if definition.synonyms %}
+            <p class="mb-1"><strong>Synonyms:</strong> {{ definition.synonyms | join: ", " }}</p>
+          {% endif %}
+          {% if definition.antonyms %}
+            <p class="mb-1"><strong>Antonyms:</strong> {{ definition.antonyms | join: ", " }}</p>
+          {% endif %}
+          {% if definition.examples %}
+            <div class="mb-1">
+              <strong>Examples:</strong>
+              <ul>
+                {% for example in definition.examples %}
+                  <li>{{ example }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          {% if definition.mnemonics %}
+            <div>
+              <strong>Mnemonics:</strong>
+              <ul>
+                {% for mnemonic in definition.mnemonics %}
+                  <li>{{ mnemonic }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        </div>
       </div>
       {% endfor %}
+
 
 
       <!-- Etymology -->
