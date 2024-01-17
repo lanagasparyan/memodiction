@@ -36,7 +36,8 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
           {% for category in site.categories %}
-          <a class="dropdown-item" href="{{ '/categories/' | append: category[0] | downcase | append: '/' | relative_url }}">{{ category[0] }}</a>
+          {% assign category_url = category[0] | replace: '_', '-' | downcase %}
+          <a class="dropdown-item" href="{{ '/categories/' | append: category_url | append: '/' | relative_url }}">{{ category[0] }}</a>
 
           {% endfor %}
         </div>

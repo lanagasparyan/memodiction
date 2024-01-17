@@ -1,5 +1,5 @@
 ---
-categories: [GRE, GRE1300, TOEFL, English, Test]
+categories: [GRE, GRE_SET_2, TOEFL, English, Test]
 data:
   word: Aberration
   definitions:
