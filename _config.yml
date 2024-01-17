@@ -291,12 +291,14 @@ exclude:
   - docs/
   - vendor/
   - _words/
-  # - _posts/GRE1300/
-  - _posts/Test/
+  - _posts/GRE1300/
+  - _posts/GRE1700/
+  # - _posts/Test/
 
 plugins:
   - jekyll-paginate-v2
   - jekyll-sitemap
+  - jekyll-archives
 
 pagination:
   enabled: true
@@ -312,3 +314,9 @@ pagination:
   trail: 
     before: 2
     after: 2
+
+jekyll-archives:
+  enabled: ['categories']
+  layout: 'archive'
+  permalinks:
+    category: '/categories/:name/'

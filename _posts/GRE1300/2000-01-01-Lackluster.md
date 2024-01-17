@@ -1,4 +1,5 @@
 ---
+categories: [GRE, GRE_SET_1, TOEFL, English]
 data:
   word: Lackluster
   definitions:

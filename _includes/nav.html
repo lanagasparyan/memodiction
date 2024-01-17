@@ -30,6 +30,17 @@
           </li>
         {%- endif -%}
       {%- endfor -%}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
+          {% for category in site.categories %}
+          <a class="dropdown-item" href="{{ '/categories/' | append: category[0] | downcase | append: '/' | relative_url }}">{{ category[0] }}</a>
+
+          {% endfor %}
+        </div>
+      </li>
       {% if site.post_search %}
         <li class="nav-item">
           <a class="nav-link" id="nav-search-link" href="#" title="Search">
