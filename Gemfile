@@ -7,4 +7,6 @@ gemspec
 # Fix for Ruby 3.3 compatibility
 gem "bigdecimal"
 gem "logger"
+gem "base64"
+gem "csv"
 

@@ -42,11 +42,6 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
-      - name: Add missing gems
-        run: |
-          echo "gem 'base64'" >> Gemfile
-          echo "gem 'csv'" >> Gemfile
-          bundle install
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --incremental
